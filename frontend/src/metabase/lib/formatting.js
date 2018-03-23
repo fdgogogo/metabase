@@ -5,6 +5,8 @@ import inflection from "inflection";
 import moment from "moment";
 import Humanize from "humanize-plus";
 import React from "react";
+import ReactImageZoom from 'react-image-zoom';
+
 
 import ExternalLink from "metabase/components/ExternalLink.jsx";
 
