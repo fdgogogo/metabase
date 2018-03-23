@@ -322,6 +322,18 @@ export function formatUrl(value: Value, { jsx }: FormattingOptions = {}) {
   }
 }
 
+
+export function formatImage(value: Value, {jsx}: FormattingOptions = {}) {
+  const url = String(value);
+  if (jsx && URL_WHITELIST_REGEX.test(url)) {
+    return (
+      <ReactImageZoom img={url} width="30" height="30"/>
+    );
+  } else {
+    return url;
+  }
+}
+
 // fallback for formatting a string without a column special_type
 function formatStringFallback(value: Value, options: FormattingOptions = {}) {
   value = formatUrl(value, options);
@@ -358,6 +370,8 @@ export function formatValue(value: Value, options: FormattingOptions = {}) {
     return null;
   } else if (column && isa(column.special_type, TYPE.URL)) {
     return formatUrl(value, options);
+  } else if (column && isa(column.special_type, TYPE.ImageURL)) {
+    return formatImage(value, options);
   } else if (column && isa(column.special_type, TYPE.Email)) {
     return formatEmail(value, options);
   } else if (column && isa(column.base_type, TYPE.Time)) {
